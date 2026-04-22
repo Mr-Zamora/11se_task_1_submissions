@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman Game</title>
+</head>
+<body>
+    <h2>Select a Difficulty</h2>
+    <!--
+        This form sends the selected difficulty to Flask.
+    -->
+    <form method="POST">
+        <select name="dropdown" required>
+            <option value="">-- Select --</option>
+
+            <!-- Loop through difficulty options passed from Flask This is the dropdown -->
+            {% for opt in options %}
+                <option value="{{ opt }}" {% if selected == opt %}selected{% endif %}>
+                    {{ opt }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Start Game</button>
+    </form>
+
+    <!-- Only show the game and timer once a difficulty is selected -->
+    {% if selected %}
+        <hr>
+
+        <h3>Difficulty: <strong>{{ selected }}</strong></h3>
+
+        <!--
+            The timer value is calculated in Flask and passed
+            to the HTML as "time_left".
+        -->
+        <p>
+            <strong>Time left:</strong>
+            <span id="timer">{{ time_left }}</span> seconds
+        </p>
+
+        <!-- Display the word with hidden letters '_' -->
+        <p><strong>Word:</strong> {{ word_display }}</p>
+
+        <!-- Show messages from Flask like "already guessed" -->
+        {% if message %}
+            <p style="  color:red;">{{ message }}</p>
+        {% endif %}
+        <!--
+            Sends the guessed letter to the Flask server.
+            Flask/Python code checks if it is correct and updates points.
+        -->
+        <form method="POST">
+            <input type="text"
+                   name="guess"
+                   maxlength=chosen_length
+                   placeholder="Guess a letter"
+                   required>
+            <button type="submit">Guess</button>
+        </form>
+
+        <!-- Show already guessed letters -->
+        <p>
+            <strong>Guessed letters:</strong>
+            {{ guessed_letters | join(", ") }}
+        </p>
+
+        <!-- Show player points -->
+        <p>
+            <strong>Points:</strong>
+            <span id="Lives">{{ points }}</span> Points
+        </p>
+        <!--
+            This form is used in TWO ways:
+            1. The player can click "Restart Game"
+            2. JavaScript auto-submits it when the timer hits 0
+
+            Flask then runs:
+            session.clear()
+            session["points"] = 100
+        -->
+        <form method="POST" id="restartForm">
+    <!-- This hidden input ensures Flask receives "restart" -->
+         <input type="hidden" name="restart" value="1">
+
+    <!-- This button is for the user to click manually -->
+         <button type="submit">Restart Game</button>
+         </form>
+
+        <script>
+            // Time value passed from Flask
+            let timeLeft = {{ time_left }};
+
+            const timerDisplay = document.getElementById("timer");
+
+            const restartForm = document.getElementById("restartForm");
+
+            const countdown = setInterval(function () {
+
+                if (timeLeft > 0) {
+                    timeLeft--;
+
+                    timerDisplay.textContent = timeLeft;
+
+                    if (timeLeft <= 10) {
+                        timerDisplay.style.color = "red";
+                    }
+
+                } else {
+                    clearInterval(countdown);
+                    alert("Time's up! You loose :( ");
+
+                    restartForm.submit();
+                }
+
+            }, 1000);
+        </script>
+
+    {% endif %}
+
+</body>
+</html>
