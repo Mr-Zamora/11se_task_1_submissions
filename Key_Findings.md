@@ -292,9 +292,145 @@ This incentivizes good practices from the start.
 
 ## 📚 Related Documents
 
+- **GitHub repo:** https://github.com/Mr-Zamora/11se_task_1_submissions
+- **Marking.md** - Breakdown of marks based on rubric and assessment notification requirements
 - **PEP8_Analysis_Report.md** - Detailed analysis with examples
 - **Student_Quick_Reference_Guide.md** - Quick lookup for correct conventions
 - **Real_World_Consequences.md** - Why these standards matter
+
+---
+
+## 📘 PEP8 Documentation for Students
+
+### What is PEP8?
+
+PEP8 is Python's official style guide - it provides conventions for writing readable, consistent Python code. Following PEP8 makes your code easier to read, maintain, and collaborate on with others.
+
+### Key PEP8 Rules for File Naming
+
+#### ✅ DO Use:
+- **Lowercase letters only:** `hangman.py`, `game_logic.py`, `word_bank.py`
+- **Underscores for spaces:** `hangman_game.py`, `user_interface.py`
+- **Descriptive names:** Names that clearly indicate what the file does
+- **Short, meaningful names:** Avoid overly long filenames
+
+#### ❌ DON'T Use:
+- **Capital letters:** `Hangman.py`, `Game.py`, `MyFile.py`
+- **Spaces:** `hangman game.py`, `my file.py`
+- **Hyphens:** `hangman-game.py`, `my-file.py`
+- **Version numbers:** `hangman-v1.py`, `game-2.py`
+- **Personal names:** `johns_game.py`, `mary_hangman.py`
+- **Non-descriptive names:** `test.py`, `file.py`, `code.py`
+
+### PEP8 Rules for Folder Naming
+
+#### ✅ DO Use:
+- **Lowercase letters only:** `hangman`, `game_project`, `assets`
+- **Underscores for spaces:** `hangman_game`, `user_interface`
+- **Descriptive names:** Names that indicate folder contents
+- **No spaces:** Critical for GitHub and cross-platform compatibility
+
+#### ❌ DON'T Use:
+- **Spaces:** `hangman game`, `my project` (breaks many tools)
+- **Capital letters:** `Hangman`, `GameProject`
+- **Hyphens:** `hangman-game`, `my-project`
+- **Special characters:** `hangman@game`, `project#1`
+
+### PEP8 Rules for Code
+
+#### Variable Names:
+- Use `lowercase_with_underscores`: `user_score`, `word_list`, `game_active`
+- ✅ Good: `max_attempts`, `current_word`, `guessed_letters`
+- ❌ Bad: `maxAttempts`, `currentWord`, `GuessedLetters`
+
+#### Function Names:
+- Use `lowercase_with_underscores`: `get_word()`, `check_guess()`, `display_progress()`
+- ✅ Good: `load_word_bank()`, `validate_input()`, `update_display()`
+- ❌ Bad: `getWord()`, `checkGuess()`, `UpdateDisplay()`
+
+#### Constant Names:
+- Use `UPPERCASE_WITH_UNDERSCORES`: `MAX_ATTEMPTS`, `WORD_BANK`, `DIFFICULTY_LEVELS`
+- ✅ Good: `MAX_GUESSES`, `CSV_FILE_PATH`, `HINT_LIMIT`
+- ❌ Bad: `maxGuesses`, `csvFilePath`, `hint_limit`
+
+#### Import Organization:
+- Import standard library first: `import random`, `import time`
+- Import third-party libraries second: `import pandas`, `import flask`
+- Import local modules third: `from word_bank import load_words`
+- Each import on its own line
+
+#### Line Length:
+- Maximum 79 characters per line
+- Break long lines using parentheses or backslashes
+- ✅ Good:
+  ```python
+  word_list = load_words_from_csv(
+      'custom_words.csv',
+      min_length=4
+  )
+  ```
+- ❌ Bad:
+  ```python
+  word_list = load_words_from_csv('custom_words.csv', min_length=4, max_length=10, difficulty='medium')
+  ```
+
+#### Whitespace:
+- One space around operators: `x = 5`, `a + b`, `if x > 0:`
+- No spaces inside function calls: `func(arg)`, not `func( arg )`
+- Two blank lines between functions
+- One blank line between logical sections
+
+### Why PEP8 Matters
+
+1. **Readability:** Consistent code is easier to read and understand
+2. **Collaboration:** Teams can work together more effectively
+3. **Professionalism:** Industry standard for Python development
+4. **Tool Compatibility:** Many tools expect PEP8 compliance
+5. **Career Skills:** Employers expect PEP8 knowledge
+
+### Tools to Check PEP8 Compliance
+
+#### Pylint:
+```bash
+pip install pylint
+pylint your_file.py
+```
+
+#### Flake8:
+```bash
+pip install flake8
+flake8 your_file.py
+```
+
+#### Black (Auto-formatter):
+```bash
+pip install black
+black your_file.py
+```
+
+### Quick Checklist Before Submitting
+
+- [ ] All filenames use lowercase letters only
+- [ ] All filenames use underscores, not spaces or hyphens
+- [ ] All folder names use lowercase letters only
+- [ ] All folder names use underscores, not spaces
+- [ ] Filenames are descriptive and indicate purpose
+- [ ] No version numbers in filenames
+- [ ] No personal names in filenames
+- [ ] Variable names use lowercase_with_underscores
+- [ ] Function names use lowercase_with_underscores
+- [ ] Constants use UPPERCASE_WITH_UNDERSCORES
+- [ ] Each import is on its own line
+- [ ] Lines are under 79 characters
+- [ ] Proper spacing around operators
+
+### Common Mistakes to Avoid
+
+1. **Using CamelCase in Python:** Python uses snake_case, not CamelCase
+2. **Forgetting to run a linter:** Always check your code before submitting
+3. **Using version numbers:** Use Git for version control, not filenames
+4. **Adding personal names:** Code should be independent of the author
+5. **Ignoring line length:** Long lines are hard to read on small screens
 
 ---
 
